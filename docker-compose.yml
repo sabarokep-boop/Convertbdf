@@ -2,7 +2,7 @@ services:
   app:
     build: .
     restart: unless-stopped
-    environment: [MAX_MB=50, CONCURRENCY=2]
+    environment: [MAX_MB=50, CONCURRENCY=2, 'DOMAIN=${DOMAIN}', 'ADSENSE_PUB=${ADSENSE_PUB:-}']
     mem_limit: 2g
     tmpfs: ["/tmp:size=1g"]
   caddy:

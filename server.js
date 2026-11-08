@@ -39,7 +39,11 @@ app.post('/api/:tool',up.single('file'),async(req,res)=>{
 });
 app.use((err,req,res,next)=>res.status(err.code==='LIMIT_FILE_SIZE'?413:400).json({error:err.code||'error'}));
 app.get('/health',(_,r)=>r.send('ok'));
-app.use(express.static(path.join(__dirname,'public'),{maxAge:'7d'}));
+const D=process.env.DOMAIN,PUB=(process.env.ADSENSE_PUB||'').trim();
+app.get('/ads.txt',(_,r)=>PUB?r.type('text/plain').send('google.com, '+PUB.replace(/^ca-/,'')+', DIRECT, f08c47fec0942fa0\n'):r.sendStatus(404));
+app.get('/robots.txt',(_,r)=>r.type('text/plain').send('User-agent: *\nAllow: /\n'+(D?'Sitemap: https://'+D+'/sitemap.xml\n':'')));
+app.get('/sitemap.xml',(_,r)=>r.type('xml').send('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+['','about','contact','privacy','terms','cookies','pdf-to-word','word-to-pdf','image-to-pdf','jpg-to-pdf','excel-to-pdf','pdf-to-image','pdf-to-jpg','merge-pdf','pdf-to-text','image-to-text'].map(p=>'<url><loc>https://'+D+'/'+p+'</loc></url>').join('')+'</urlset>'));
+app.use(express.static(path.join(__dirname,'public'),{maxAge:'1d',extensions:['html']}));
 
 // تنظيف أي مجلدات عالقة أقدم من ساعة
 setInterval(async()=>{try{for(const n of await fs.readdir(os.tmpdir())){if(!/^job-/.test(n))continue;const p=path.join(os.tmpdir(),n);if(Date.now()-(await fs.stat(p)).mtimeMs>36e5)await fs.rm(p,{recursive:true,force:true})}}catch{}},6e5).unref();
