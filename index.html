@@ -2,6 +2,10 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
+<link rel="icon" href="/favicon.ico" sizes="48x48"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="canonical" href="https://__DOMAIN__/">
+<meta property="og:image" content="https://__DOMAIN__/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="ar_AR"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://__DOMAIN__/og-image.png">
+<!-- ضع كود AdSense هنا (داخل head) بعد التسجيل في أدسنس -->
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>حوّل ملفك – تحويل PDF إلى Word وصور، وWord وExcel وصور إلى PDF أونلاين مجانًا</title>
 <meta name="description" content="حوّل ملفك أونلاين مجانًا وبدون تسجيل: تحويل Word إلى PDF، PDF إلى Word، PDF إلى صور JPG، الصور إلى PDF، Excel إلى PDF، ودمج ملفات PDF. اكتب وش تبغى والموقع يحوّل.">
@@ -57,6 +61,8 @@ footer{margin-top:26px;color:var(--mut);font-size:.88rem;text-align:center}
 .sheet{position:absolute;left:-10000px;top:0;width:794px;padding:24px;background:#fff;color:#000;font-family:Tajawal,Arial,sans-serif;font-size:14px;line-height:1.6}
 .sheet table{border-collapse:collapse;margin:8px 0}.sheet td,.sheet th{border:1px solid #999;padding:3px 6px}
 .sheet img{max-width:100%}
+.tools a{display:block;text-decoration:none;color:inherit;border:1px solid var(--bd);background:var(--card);border-radius:14px;padding:10px 12px;font-size:.92rem}.tools a:hover{border-color:var(--pri)}
+.seo ol{padding:0 22px;color:var(--mut)}
 </style>
 </head>
 <body>
@@ -83,19 +89,23 @@ footer{margin-top:26px;color:var(--mut);font-size:.88rem;text-align:center}
 <button class="go" id="go">حوّل</button>
 </div>
 <div class="chips" id="ch">
-<button>حوّله إلى PDF</button><button>ادمج الملفات</button><button>حوّله إلى صور</button><button>حوّله إلى Word</button><button>استخرج النص</button><button>اضغط الملف</button>
+<button>حوّله إلى PDF</button><button>ادمج الملفات</button><button>حوّله إلى صور</button><button>حوّله إلى Word</button><button>استخرج النص</button><button>اضغط الملف</button><button>استخرج النص من صورة</button>
 </div>
 <div id="st" aria-live="polite"></div>
 <div id="out"></div>
 </div>
 
 <div class="tools">
-<div><b>Word ← PDF</b><span>ملف docx إلى PDF</span></div>
-<div><b>Excel ← PDF</b><span>xlsx و csv إلى PDF</span></div>
-<div><b>صور ← PDF</b><span>صورة أو عدة صور بملف واحد</span></div>
-<div><b>PDF ← صور</b><span>كل صفحة صورة JPG</span></div>
-<div><b>PDF ← Word</b><span>استخراج النص لملف قابل للتعديل</span></div>
-<div><b>دمج PDF</b><span>اجمع عدة ملفات بملف واحد</span></div>
+<a href="/pdf-to-word"><b>تحويل PDF إلى وورد Word</b></a>
+<a href="/word-to-pdf"><b>تحويل وورد Word إلى PDF</b></a>
+<a href="/image-to-pdf"><b>تحويل الصور إلى PDF</b></a>
+<a href="/jpg-to-pdf"><b>تحويل JPG إلى PDF</b></a>
+<a href="/excel-to-pdf"><b>تحويل إكسل Excel إلى PDF</b></a>
+<a href="/pdf-to-image"><b>تحويل PDF إلى صور</b></a>
+<a href="/pdf-to-jpg"><b>تحويل PDF إلى JPG</b></a>
+<a href="/image-to-text"><b>استخراج النص من صورة</b></a>
+<a href="/merge-pdf"><b>دمج ملفات PDF</b></a>
+<a href="/pdf-to-text"><b>استخراج النص من PDF</b></a>
 </div>
 <section class="seo">
 <h2>حوّل ملفك أونلاين مجانًا وبدون تسجيل</h2>
@@ -105,7 +115,7 @@ footer{margin-top:26px;color:var(--mut);font-size:.88rem;text-align:center}
 <li>تحويل Word إلى PDF</li><li>تحويل DOCX إلى PDF</li><li>تحويل PDF إلى Word</li><li>تحويل PDF إلى نص</li>
 <li>تحويل PDF إلى صورة</li><li>تحويل PDF إلى JPG</li><li>تحويل الصور إلى PDF</li><li>تحويل JPG إلى PDF</li>
 <li>تحويل PNG إلى PDF</li><li>تحويل صورة إلى PDF</li><li>تحويل Excel إلى PDF</li><li>تحويل CSV إلى PDF</li>
-<li>دمج ملفات PDF</li><li>جمع عدة PDF في ملف واحد</li><li>استخراج النص من PDF</li><li>تحويل ملف إلى PDF أونلاين</li>
+<li>دمج ملفات PDF</li><li>جمع عدة PDF في ملف واحد</li><li>استخراج النص من PDF</li><li>استخراج النص من صورة (OCR)</li><li>تحويل ملف إلى PDF أونلاين</li>
 </ul>
 <h2>أسئلة شائعة</h2>
 <details><summary>كيف أحوّل ملفي إلى PDF؟</summary><p>ارفع ملف Word أو Excel أو صورة، واكتب «حوّله إلى PDF» أو اضغط زر حوّل مباشرة.</p></details>
@@ -117,6 +127,7 @@ footer{margin-top:26px;color:var(--mut);font-size:.88rem;text-align:center}
 <footer>🔒 التحويل يتم داخل متصفحك، وملفاتك ما تنرفع لأي سيرفر.</footer>
 </div>
 
+<script src="/config.js"></script><script src="/site.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -169,6 +180,7 @@ function plan(raw){
   const other=has('img')||has('word')||has('txt')||has('xl')||has('cmp')||has('ocr');
   if(has('mrg')||(files.length>1&&!other))
    return files.length<2?{err:'الدمج يحتاج ملفين PDF أو أكثر.'}:{fn:merge,label:'دمج الملفات'};
+  if((has('cmp')||has('ocr'))&&window.SITE&&window.SITE.api===false)return{err:'ضغط PDF وOCR غير متاحين في هذه النسخة.'};
   if(has('cmp'))return{fn:compressPdf,label:'ضغط PDF'};
   if(has('ocr'))return{fn:ocrPdf,label:'جعل PDF قابلًا للبحث (OCR)'};
   if(has('img'))return{fn:pdf2img,label:'تحويل PDF إلى صور'};
@@ -179,6 +191,7 @@ function plan(raw){
  }
  if(ks.includes('pdf'))return{err:'ما أقدر أخلط PDF مع أنواع ثانية. ارفع نوع واحد كل مرة.'};
  if(!ks.every(k=>k===ks[0]))return{err:'ارفع نوع واحد من الملفات كل مرة (مثلًا صور فقط).'};
+ if(ks[0]==='img'&&(has('txt')||has('ocr'))&&!has('pdf'))return{fn:img2txt,label:'استخراج النص من الصورة (OCR)'};
  const own={img:'img',word:'word',excel:'xl'}[ks[0]];
  if(!has('pdf')&&['img','word','xl','txt'].filter(k=>k!==own).some(has))return{err:'هذا النوع من الملفات يتحول إلى PDF فقط. اكتب: حوّله إلى PDF'};
  const m={img:[img2pdf,'تحويل الصور إلى PDF'],word:[word2pdf,'تحويل المستند إلى PDF'],excel:[excel2pdf,'تحويل Excel إلى PDF']}[ks[0]];
@@ -186,10 +199,11 @@ function plan(raw){
 }
 
 async function run(){
+ if(window.EXPECT&&files.some(f=>kind(f)!==window.EXPECT))return say('هذه الأداة تقبل ملفات '+window.EXPECT_L+' فقط. لباقي التحويلات ارجع للصفحة الرئيسية.',true);
  const p=plan($('#cm').value);
  if(p.err)return say(p.err,true);
  $('#out').innerHTML='';$('#go').disabled=true;say('⏳ فهمت: '+p.label+'...');
- try{await p.fn();say('✅ تم! نزّل ملفاتك بالأسفل.')}
+ try{await p.fn();if(!$('#st').classList.contains('err'))say('✅ تم! نزّل ملفاتك بالأسفل.')}
  catch(e){console.error(e);say('صار خطأ أثناء التحويل. تأكد أن الملف سليم وجرّب مرة ثانية.',true)}
  $('#go').disabled=false;
 }
@@ -273,11 +287,25 @@ async function pdf2wordLocal(){
   add(new Blob(['\ufeff'+h],{type:'application/msword'}),base(f)+'.doc');
  }
 }
-async function srv(tool,f,ext,sfx=''){const fd=new FormData();fd.append('file',f);const r=await fetch('/api/'+tool,{method:'POST',body:fd});if(!r.ok)throw new Error(r.status);add(await r.blob(),base(f)+sfx+'.'+ext)}
+async function srv(tool,f,ext,sfx=''){if(window.SITE&&window.SITE.api===false)throw new Error('no-api');const fd=new FormData();fd.append('file',f);const r=await fetch('/api/'+tool,{method:'POST',body:fd});if(!r.ok)throw new Error(r.status);add(await r.blob(),base(f)+sfx+'.'+ext)}
 const viaSrv=(tool,ext,local)=>async()=>{try{for(const f of files)await srv(tool,f,ext)}catch(e){console.warn(e);$('#out').innerHTML='';await local()}};
 const word2pdf=viaSrv('to-pdf','pdf',word2pdfLocal),excel2pdf=viaSrv('to-pdf','pdf',excel2pdfLocal),pdf2word=viaSrv('pdf-to-word','docx',pdf2wordLocal);
 const compressPdf=async()=>{for(const f of files)await srv('compress',f,'pdf','-مضغوط')};
 const ocrPdf=async()=>{for(const f of files)await srv('ocr',f,'pdf','-نص')};
+
+let tsLoad;const loadTs=()=>tsLoad||(tsLoad=new Promise((ok,no)=>{const e=document.createElement('script');e.src='https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js';e.onload=ok;e.onerror=()=>{tsLoad=null;no(new Error('load'))};document.head.appendChild(e)}));
+async function img2txt(){
+ say('⏳ تحميل محرك قراءة النص (أول مرة فقط)...');await loadTs();
+ for(const f of files){
+  const r=await Tesseract.recognize(f,'ara+eng',{logger:m=>{if(m.status==='recognizing text')say('⏳ جاري قراءة النص '+Math.round(m.progress*100)+'%')}});
+  const t=r.data.text.trim();
+  if(!t){say('ما لقيت نص في '+f.name+' (جرّب صورة أوضح)',true);continue}
+  add(new Blob(['\ufeff'+t],{type:'text/plain;charset=utf-8'}),base(f)+'.txt');
+  const ta=document.createElement('textarea');ta.readOnly=true;ta.rows=8;ta.dir='auto';ta.value=t;
+  ta.style.cssText='width:100%;font:inherit;padding:10px;border-radius:12px;border:1px solid var(--bd);background:var(--bg);color:var(--tx)';
+  $('#out').appendChild(ta);
+ }
+}
 </script>
 </body>
 </html>
