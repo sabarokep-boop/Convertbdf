@@ -65,6 +65,22 @@ footer{margin-top:26px;color:var(--mut);font-size:.88rem;text-align:center}
 .sheet img{max-width:100%}
 .tools a{display:block;text-decoration:none;color:inherit;border:1px solid var(--bd);background:var(--card);border-radius:14px;padding:10px 12px;font-size:.92rem}.tools a:hover{border-color:var(--pri)}
 .seo ol{padding:0 22px;color:var(--mut)}
+#stage{margin-top:14px;text-align:center;color:var(--tx)}#stage svg{width:100%;max-width:420px;height:auto;overflow:visible}
+#cap{min-height:1.7em;font-weight:700;color:var(--pri);margin-top:2px}
+.wk{transform-box:fill-box;transform-origin:50% 100%}
+.lg{transform-box:fill-box;transform-origin:50% 0;animation:leg .35s ease-in-out infinite alternate}.lg.b{animation-direction:alternate-reverse}
+@keyframes leg{from{transform:rotate(-24deg)}to{transform:rotate(24deg)}}
+.wa{animation:wa 8.8s linear infinite}.wb{animation:wb 8.8s linear infinite}
+@keyframes wa{0%,5%{transform:translateX(0)}35%,38%{transform:translateX(-208px)}68%,100%{transform:translateX(0)}}
+@keyframes wb{0%,30%{transform:translateX(0) rotate(0)}50%{transform:translateX(-104px) rotate(0)}53%{transform:translateX(-112px) rotate(-14deg)}57%{transform:translateX(-128px) rotate(-88deg)}64%{transform:translateX(-128px) rotate(-88deg)}69%{transform:translateX(-128px) rotate(8deg)}72%{transform:translateX(-128px) rotate(0)}84%,87%{transform:translateX(-208px) rotate(0)}97%,100%{transform:translateX(0) rotate(0)}}
+.sh{transform-box:fill-box;transform-origin:50% 50%}.sr{fill:var(--a)}.sr.a{animation:fa 8.8s linear infinite}.sr.b{animation:fb 8.8s linear infinite}
+@keyframes fa{0%,5%{fill:var(--a)}35%,100%{fill:var(--b)}}@keyframes fb{0%,30%{fill:var(--a)}80%,100%{fill:var(--b)}}
+.sh.ha{animation:va 8.8s linear infinite}.sh.hb{animation:vb 8.8s linear infinite,tb 8.8s ease-in-out infinite}
+@keyframes va{0%,4%{opacity:0}5%,35%{opacity:1}36%,100%{opacity:0}}@keyframes vb{0%,29%{opacity:0}30%,83%{opacity:1}84%,100%{opacity:0}}
+@keyframes tb{0%,52%{transform:translate(0,0) rotate(0)}56%{transform:translate(18px,-40px) rotate(-40deg)}62%{transform:translate(26px,6px) rotate(-70deg)}70%,100%{transform:translate(0,0) rotate(0)}}
+.tg{transform-box:fill-box;transform-origin:50% 50%;animation:bump 8.8s linear infinite}
+@keyframes bump{0%,34%{transform:scale(1)}37%{transform:scale(1.2)}40%,83%{transform:scale(1)}86%{transform:scale(1.2)}89%,100%{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){#stage *{animation:none!important}}
 </style>
 <script>window.EXPECT='img';window.EXPECT_L='الصور';</script>
 </head>
@@ -94,6 +110,7 @@ footer{margin-top:26px;color:var(--mut);font-size:.88rem;text-align:center}
 <div class="chips" id="ch">
 <button>حوّله إلى PDF</button><button>ادمج الملفات</button><button>حوّله إلى صور</button><button>حوّله إلى Word</button><button>استخرج النص</button><button>اضغط الملف</button><button>استخرج النص من صورة</button>
 </div>
+<div id="stage" hidden></div>
 <div id="st" aria-live="polite"></div>
 <div id="out"></div>
 </div>
@@ -198,10 +215,10 @@ async function run(){
  if(window.EXPECT&&files.some(f=>kind(f)!==window.EXPECT))return say('هذه الأداة تقبل ملفات '+window.EXPECT_L+' فقط. لباقي التحويلات ارجع للصفحة الرئيسية.',true);
  const p=plan($('#cm').value);
  if(p.err)return say(p.err,true);
- $('#out').innerHTML='';$('#go').disabled=true;say('⏳ فهمت: '+p.label+'...');
+ $('#out').innerHTML='';$('#go').disabled=true;say('⏳ فهمت: '+p.label+'...');const stg=stageStart(p.fn);
  try{await p.fn();if(!$('#st').classList.contains('err'))say('✅ تم! نزّل ملفاتك بالأسفل.')}
  catch(e){console.error(e);say('صار خطأ أثناء التحويل. تأكد أن الملف سليم وجرّب مرة ثانية.',true)}
- $('#go').disabled=false;
+ stageStop(stg);$('#go').disabled=false;
 }
 
 async function html2pdfBlob(html){
@@ -314,6 +331,22 @@ document.addEventListener('click',e=>{
  dz.classList.add('on');setTimeout(()=>dz.classList.remove('on'),1600);
 });
 $('#cm').addEventListener('input',()=>{if($('#cm').value!==CARDCMD&&window.EXPECT){window.EXPECT=null;$('#fi').accept=ALLACC}});
+
+const ICO={pdf:['#e5322d','PDF'],word:['#2b6cd9','DOC'],excel:['#1e8e5a','XLS'],img:['#f59e0b','IMG'],txt:['#64748b','TXT']};
+const CAP=['نجهّز ملفك...','المهندسون يحملون الصفحات 🏗️','نرتّب الصفحات...','نضبط التنسيق...','أحد المهندسين تعثّر! لحظة... 😅','قام ونفض الغبار 💪','يكمّل الشغل...','قرّبنا نخلّص ✨'];
+const FT=[[merge,'pdf','pdf'],[pdf2img,'pdf','img'],[pdf2word,'pdf','word'],[pdf2txt,'pdf','txt'],[compressPdf,'pdf','pdf'],[ocrPdf,'pdf','pdf'],[img2txt,'img','txt'],[img2pdf,'img','pdf'],[word2pdf,'word','pdf'],[excel2pdf,'excel','pdf']];
+const fileIco=(k,x)=>'<g transform="translate('+x+' 74)"><g class="tg"><path d="M0 4a4 4 0 0 1 4-4h22l12 12v40a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4z" fill="'+ICO[k][0]+'"/><path d="M26 0v12h12z" fill="#fff" fill-opacity=".45"/><text x="19" y="42" text-anchor="middle" font-size="12" font-weight="800" fill="#fff" font-family="Arial,sans-serif">'+ICO[k][1]+'</text></g></g>';
+const worker=(x,w,col,k)=>'<g transform="translate('+x+' 130)"><g class="wk '+w+'"><rect class="lg" x="-6" y="-14" width="4.5" height="14" rx="2" fill="#334155"/><rect class="lg b" x="1.5" y="-14" width="4.5" height="14" rx="2" fill="#334155"/><rect x="-8" y="-37" width="16" height="24" rx="6" fill="'+col+'"/><circle cy="-46" r="9" fill="#ffd9b3"/><path d="M-10-48a10 10 0 0 1 20 0z" fill="#ffb100"/><rect x="-12" y="-49" width="24" height="3" rx="1.5" fill="#e69a00"/><circle cx="-3" cy="-44" r="1.4" fill="#222"/><circle cx="3" cy="-44" r="1.4" fill="#222"/><path d="M-3-40q3 3 6 0" stroke="#222" stroke-width="1.3" fill="none" stroke-linecap="round"/><g class="sh h'+k+'"><rect class="sr '+k+'" x="-10" y="-34" width="20" height="26" rx="2"/><path d="M-6-27h12M-6-22h12M-6-17h8" stroke="#fff" stroke-opacity=".85" stroke-width="1.6"/></g><path d="M-8-32l-4 10M8-32l4 10" stroke="#ffd9b3" stroke-width="3" stroke-linecap="round"/></g></g>';
+function stageStart(fn){
+ const f=FT.find(x=>x[0]===fn)||[0,'pdf','pdf'],S={};
+ S.t=setTimeout(()=>{
+  const g=$('#stage');
+  g.innerHTML='<svg viewBox="0 0 360 150" style="--a:'+ICO[f[1]][0]+';--b:'+ICO[f[2]][0]+'" aria-hidden="true">'+fileIco(f[1],304)+fileIco(f[2],18)+'<line x1="6" y1="130" x2="354" y2="130" stroke="currentColor" stroke-opacity=".25" stroke-dasharray="4 5"/>'+worker(272,'wa','#6c4cf5','a')+worker(284,'wb','#ff6b9a','b')+'</svg><div id="cap"></div>';
+  g.hidden=false;let i=0;const c=$('#cap'),tick=()=>{c.textContent=CAP[i++%CAP.length]};tick();S.i=setInterval(tick,1100);
+ },600);
+ return S;
+}
+function stageStop(S){clearTimeout(S.t);clearInterval(S.i);const g=$('#stage');g.hidden=true;g.innerHTML=''}
 </script>
 </body>
 </html>
